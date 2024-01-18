@@ -14,6 +14,7 @@ declare global {
             REFRESH_SECRET?: string
             ACCESS_TOKEN?: string
             PASSWORD_RESET?: string
+            SMTP_PASSWORD?: string
         }
     }
 }
