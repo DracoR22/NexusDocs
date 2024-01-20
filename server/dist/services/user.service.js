@@ -86,10 +86,10 @@ class UserService {
         //---------------------------------------//CREATE JWT TOKEN//------------------------------------//
         this.generateAuthResponse = (user) => __awaiter(this, void 0, void 0, function* () {
             const requestUser = yield this.getRequestUser(user);
-            const accessToken = jsonwebtoken_1.default.sign(requestUser, "access_token", {
+            const accessToken = jsonwebtoken_1.default.sign(requestUser, process.env.ACCESS_TOKEN, {
                 expiresIn: '24h'
             });
-            const refreshToken = jsonwebtoken_1.default.sign(requestUser, "refresh_token", {
+            const refreshToken = jsonwebtoken_1.default.sign(requestUser, process.env.REFRESH_SECRET, {
                 expiresIn: '24h'
             });
             yield refresh_token_model_1.RefreshToken.destroy({

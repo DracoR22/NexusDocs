@@ -50,11 +50,11 @@ class AuthController {
 
         const isTokenActive = await userService.getIsTokenActive(refreshToken)
         if (!isTokenActive) {
-            return res.sendStatus(403)
+            return res.sendStatus(401)
         }
 
         jwt.verify(refreshToken, process.env.REFRESH_SECRET as Secret, async (error: VerifyErrors | null, decoded: unknown) => {
-            if (error)  return res.sendStatus(403)
+            if (error) return res.sendStatus(403)
 
             try {
                 const { id, email, roles } = decoded as RequestUser

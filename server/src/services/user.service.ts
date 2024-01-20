@@ -83,11 +83,11 @@ class UserService {
     public generateAuthResponse = async (user: RequestUser | User): Promise<TokenPair> => {
       const requestUser = await this.getRequestUser(user)
 
-      const  accessToken = jwt.sign(requestUser, "access_token", {
+      const accessToken = jwt.sign(requestUser, process.env.ACCESS_TOKEN as Secret, {
         expiresIn: '24h'
       })
 
-      const refreshToken = jwt.sign(requestUser, "refresh_token", {
+      const refreshToken = jwt.sign(requestUser, process.env.REFRESH_SECRET as Secret, {
         expiresIn: '24h'
       })
 
