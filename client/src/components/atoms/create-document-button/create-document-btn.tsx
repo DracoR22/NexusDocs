@@ -24,9 +24,8 @@ const CreateDocumentButton = () => {
     try {
         const response = await DocumentService.create(accessToken)
         const { id } = response.data as DocumentInterface
-
         navigate(`/document/${id}`)
-    } catch (error) {
+    } catch (err) {
         error(`Unable to create a new document. Please try again later`)
     } finally {
         setLoading(false)
@@ -39,7 +38,8 @@ const CreateDocumentButton = () => {
         <h1>Start a new document</h1>
         <div className="flex items-center">
             <div className="space-y-2">
-              <button className="h-52 w-40 bg-white border hover:border-blue-500 flex items-center justify-center" disabled={loading} onClick={() => handleDocumentCreateBtnClick}>
+              <button className="h-52 w-40 bg-white border hover:border-blue-500 flex items-center justify-center" disabled={loading} 
+              onClick={handleDocumentCreateBtnClick}>
                  <span className={`${loading && 'opacity-0'}`}>
                    <PlusIcon className="w-16 h-16 text-sky-500"/>
                  </span>

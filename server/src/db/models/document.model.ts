@@ -5,7 +5,7 @@ import { DocumentUser } from "./document-user.model";
 @DefaultScope(() => ({
    include: [
       {
-         model: Document,
+         model: DocumentUser,
          include: [
            {
             model: User,

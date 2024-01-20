@@ -12,7 +12,7 @@ class DocumentController {
 
         const { id } = req.params
 
-        const document = await documentService.FindDocumentById(parseInt(id), parseInt(req.user.id))
+        const document = await documentService.findDocumentById(parseInt(id), parseInt(req.user.id))
 
         if (document === null) return res.sendStatus(404)
 
@@ -45,18 +45,18 @@ class DocumentController {
 
     //-------------------------------------//UPDATE DOCUMENT//-------------------------------------//
     public update = catchAsync(async (req: Request, res: Response) => {
-        const err = validationResult(req)
+        // const err = validationResult(req)
 
-        if (!err.isEmpty()) {
-            return res.status(400).json(err)
-        }
+        // if (!err.isEmpty()) {
+        //     return res.status(400).json(err)
+        // }
 
         if (!req.user) return res.sendStatus(401)
 
         const { id } = req.params
         const { title, content, isPublic } = req.body
 
-        const document = await documentService.FindDocumentById(parseInt(id), parseInt(req.user.id))
+        const document = await documentService.findDocumentById(parseInt(id), parseInt(req.user.id))
 
         if (document === null) return res.sendStatus(404)
 
@@ -71,7 +71,7 @@ class DocumentController {
 
     //-------------------------------------//CREATE DOCUMENT//-------------------------------------//
     public create = catchAsync(async (req: Request, res: Response) => {
-        const document = Document.create({
+        const document = await Document.create({
             userId: req.user?.id
         })
 

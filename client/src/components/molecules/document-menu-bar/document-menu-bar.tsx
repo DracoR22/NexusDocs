@@ -1,10 +1,12 @@
-import { ChangeEvent, FocusEvent, useContext } from "react"
+import { ChangeEvent, FocusEvent, useContext, useEffect, useState } from "react"
 import useAuth from "../../../hooks/use-auth"
 import { DocumentContext } from "../../../contexts/document-context"
 import DocumentInterface from "../../../types/interfaces/document"
 import DocumentService from "../../../services/document-service"
 import UserDropDown from "../../atoms/user-dropdown/user-dropdown"
 import useRandomBackground from "../../../hooks/use-random-background"
+import { useParams } from "react-router-dom"
+import useDocument from "../../../hooks/use-document"
 
 const CurrentUsers = () => {
     const { email } = useAuth();
@@ -30,14 +32,24 @@ const CurrentUsers = () => {
 
 
 const DocumentMenuBar = () => {
+   const { id } = useParams()
 
    const { accessToken, userId } = useAuth()
-   const { document, saving, setDocumentTitle, setDocument, setSaving, setErrors } = useContext(DocumentContext) 
+   const { saving, setDocument, setSaving, setErrors } = useContext(DocumentContext) 
+   const { document } = useDocument(parseInt(id))
 
-   const handleTitleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const title = event.target.value;
-    setDocumentTitle(title);
-  };
+   const [upTitle, setUpTitle] = useState<string>('');
+
+   useEffect(() => {
+     if (document && document.title) {
+       setUpTitle(document.title);
+     }
+   }, [document]);
+ 
+   const handleTitleInputChange = (event) => {
+     const title = event.target.value;
+     setUpTitle(title);
+   };
 
    // UPDATE DOCUMENT TITLE
   const handleTitleInputBlur = async (event: FocusEvent<HTMLInputElement>) => {
@@ -46,8 +58,9 @@ const DocumentMenuBar = () => {
     setSaving(true)
 
     const title = (event.target as HTMLInputElement).value
+    
     const updatedDocument = {...document, title } as DocumentInterface
-
+  
     try {
         await DocumentService.update(accessToken, updatedDocument)
     } catch (error) {
@@ -61,12 +74,12 @@ const DocumentMenuBar = () => {
     <div className="w-full flex justify-between items-center px-3 pb-1 border-b">
       <div className="w-full flex justify-start items-center overflow-x-hidden md:overflow-visible">
         {/* LOGO */}
-        <h1 className="text-2xl font-bold hidden sm:flex">NEXUS <span className="text-sky-500 pl-1"> DOCS</span></h1>
+        <h1 className="text-2xl font-bold hidden sm:flex mr-6">NEXUS <span className="text-sky-500 pl-1"> DOCS</span></h1>
         {/* TITLE INPUT */}
          <div className="flex flex-col">
-            <input maxLength={25} type="text" onBlur={(event) => handleTitleInputBlur(event)}
-             onChange={handleTitleInputChange} value={document?.title ? document?.title : "Untitled"}
-             className="font-medium text-lg px-2 pt-2"/>
+            <input maxLength={25} type="text" className="font-semibold text-xl my-2 px-2 pt-2 outline-none" placeholder="Untitled Document"
+             onBlur={(event) => handleTitleInputBlur(event)} name="title" id="title"
+             onChange={(event) => handleTitleInputChange(event)} value={upTitle}/>
              <div className="flex items-center">
             <button className="text-sm whitespace-nowrap px-2 py-1 font-medium hover:bg-gray-100 rounded-md">
               File

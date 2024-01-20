@@ -17,7 +17,6 @@ const catch_async_1 = __importDefault(require("../middleware/catch-async"));
 const document_service_1 = __importDefault(require("../services/document.service"));
 const document_model_1 = require("../db/models/document.model");
 const document_user_model_1 = require("../db/models/document-user.model");
-const express_validator_1 = require("express-validator");
 class DocumentController {
     constructor() {
         //---------------------------------------//GET DOCUMENT//--------------------------------------//
@@ -25,7 +24,7 @@ class DocumentController {
             if (!req.user)
                 return res.sendStatus(401);
             const { id } = req.params;
-            const document = yield document_service_1.default.FindDocumentById(parseInt(id), parseInt(req.user.id));
+            const document = yield document_service_1.default.findDocumentById(parseInt(id), parseInt(req.user.id));
             if (document === null)
                 return res.sendStatus(404);
             return res.status(200).json(document);
@@ -52,15 +51,15 @@ class DocumentController {
         }));
         //-------------------------------------//UPDATE DOCUMENT//-------------------------------------//
         this.update = (0, catch_async_1.default)((req, res) => __awaiter(this, void 0, void 0, function* () {
-            const err = (0, express_validator_1.validationResult)(req);
-            if (!err.isEmpty()) {
-                return res.status(400).json(err);
-            }
+            // const err = validationResult(req)
+            // if (!err.isEmpty()) {
+            //     return res.status(400).json(err)
+            // }
             if (!req.user)
                 return res.sendStatus(401);
             const { id } = req.params;
             const { title, content, isPublic } = req.body;
-            const document = yield document_service_1.default.FindDocumentById(parseInt(id), parseInt(req.user.id));
+            const document = yield document_service_1.default.findDocumentById(parseInt(id), parseInt(req.user.id));
             if (document === null)
                 return res.sendStatus(404);
             if (title !== undefined && title !== null)
@@ -75,7 +74,7 @@ class DocumentController {
         //-------------------------------------//CREATE DOCUMENT//-------------------------------------//
         this.create = (0, catch_async_1.default)((req, res) => __awaiter(this, void 0, void 0, function* () {
             var _c;
-            const document = document_model_1.Document.create({
+            const document = yield document_model_1.Document.create({
                 userId: (_c = req.user) === null || _c === void 0 ? void 0 : _c.id
             });
             return res.status(201).json(document);

@@ -15,16 +15,16 @@ const document_user_model_1 = require("../db/models/document-user.model");
 class DocumentService {
     constructor() {
         //------------------------------------//GET DOCUMENT BY ID//-----------------------------------//
-        this.FindDocumentById = (id, userId) => __awaiter(this, void 0, void 0, function* () {
+        this.findDocumentById = (id, userId) => __awaiter(this, void 0, void 0, function* () {
             let document = yield document_model_1.Document.findOne({
                 where: {
                     [sequelize_1.Op.or]: [
                         {
-                            id,
-                            userId
+                            id: id,
+                            userId: userId
                         },
                         {
-                            id,
+                            id: id,
                             isPublic: true
                         }
                     ]
@@ -33,7 +33,7 @@ class DocumentService {
             if (!document) {
                 const sharedDocument = yield document_user_model_1.DocumentUser.findOne({
                     where: {
-                        userId,
+                        userId: userId,
                         documentId: id
                     },
                     include: {

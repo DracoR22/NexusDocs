@@ -47,7 +47,7 @@ exports.Document = Document = __decorate([
     (0, sequelize_typescript_1.DefaultScope)(() => ({
         include: [
             {
-                model: Document,
+                model: document_user_model_1.DocumentUser,
                 include: [
                     {
                         model: user_model_1.User,
