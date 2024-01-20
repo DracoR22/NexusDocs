@@ -7,6 +7,7 @@ import UserDropDown from "../../atoms/user-dropdown/user-dropdown"
 import useRandomBackground from "../../../hooks/use-random-background"
 import { useParams } from "react-router-dom"
 import useDocument from "../../../hooks/use-document"
+import ShareDocumentModal from "../share-document-modal"
 
 const CurrentUsers = () => {
     const { email } = useAuth();
@@ -112,8 +113,7 @@ const DocumentMenuBar = () => {
 
       <div className="flex items-center flex-shrink-0 pl-3 gap-x-4">
         {document !== null && document.userId === userId && (
-        //   <ShareDocumentModal /> 
-       <h1> Share button</h1>
+         <ShareDocumentModal/> 
         )}
         <div className="flex items-center gap-x-2">
           <CurrentUsers />
