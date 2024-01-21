@@ -5,7 +5,7 @@ import DocumentInterface from "../../../types/interfaces/document"
 import DocumentService from "../../../services/document-service"
 import UserDropDown from "../../atoms/user-dropdown/user-dropdown"
 import useRandomBackground from "../../../hooks/use-random-background"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import useDocument from "../../../hooks/use-document"
 import ShareDocumentModal from "../share-document-modal"
 
@@ -41,6 +41,8 @@ const DocumentMenuBar = () => {
 
    const [upTitle, setUpTitle] = useState<string>('');
 
+   const navigate = useNavigate()
+
    useEffect(() => {
      if (document && document.title) {
        setUpTitle(document.title);
@@ -75,7 +77,7 @@ const DocumentMenuBar = () => {
     <div className="w-full flex justify-between items-center px-3 pb-1 border-b">
       <div className="w-full flex justify-start items-center overflow-x-hidden md:overflow-visible">
         {/* LOGO */}
-        <h1 className="text-2xl font-bold hidden sm:flex mr-6">NEXUS <span className="text-sky-500 pl-1"> DOCS</span></h1>
+        <h1 className="text-2xl font-bold hidden sm:flex mr-6 cursor-pointer">NEXUS <span className="text-sky-500 pl-1"> DOCS</span></h1>
         {/* TITLE INPUT */}
          <div className="flex flex-col">
             <input maxLength={25} type="text" className="font-semibold text-xl my-2 px-2 pt-2 outline-none" placeholder="Untitled Document"

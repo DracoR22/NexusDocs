@@ -12,6 +12,7 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "axios": "^1.6.5",
+    "draft-js": "^0.11.7",
     "inputmask": "^5.0.8",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
@@ -19,6 +20,7 @@
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
+    "socket.io-client": "^4.7.4",
     "typescript": "^5.3.3",
     "validator": "^13.11.0",
     "web-vitals": "^2.1.4"

@@ -40,4 +40,4 @@ import { DocumentUser } from "./document-user.model";
     user!: User
  }
 
- export  { Document }
+ export { Document }

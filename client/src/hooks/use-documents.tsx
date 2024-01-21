@@ -12,7 +12,7 @@ const useDocuments = () => {
 
   const loadDocuments = async (accessToken: string) => {
     setLoading(true);
-
+     
     try {
       const response = await DocumentService.list(accessToken);
       setDocuments(response.data as Array<DocumentInterface>);

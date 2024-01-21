@@ -14,7 +14,7 @@ const DocumentService = {
   },
 
   list: (accessToken: string) => {
-    return API.get("document/get-all", {
+    return API.get("document", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
   },

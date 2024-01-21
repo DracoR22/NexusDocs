@@ -21,10 +21,11 @@ class DocumentController {
 
     //-------------------------------------//GET ALL DOCUMENTS//-----------------------------------//
     public getAll = catchAsync(async (req: Request, res: Response) => {
+
         const documents = await Document.findAll({
             where: {
                 userId: req.user?.id
-            }
+            },
         })
 
         const documentUsers = await DocumentUser.findAll({

@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth-context';
 import { ToastProvider } from './contexts/toast-context';
 import { DocumentProvider } from './contexts/document-context'
+import { EditorProvider } from './contexts/editor-context'
 
 import Login from './pages/login';
 import Register from './pages/register'
@@ -30,7 +31,9 @@ root.render(
          <Route path='/document/create' element={<AuthRoute element={<Create/>}/>}/>
          <Route path='/document/:id' element={<AuthRoute element={
           <DocumentProvider>
+            <EditorProvider>
              <Document/>
+            </EditorProvider>
           </DocumentProvider>
          }/>}/>
        </Routes>

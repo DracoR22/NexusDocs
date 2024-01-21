@@ -35,7 +35,7 @@ class DocumentController {
             const documents = yield document_model_1.Document.findAll({
                 where: {
                     userId: (_a = req.user) === null || _a === void 0 ? void 0 : _a.id
-                }
+                },
             });
             const documentUsers = yield document_user_model_1.DocumentUser.findAll({
                 where: {

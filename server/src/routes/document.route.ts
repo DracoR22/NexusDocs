@@ -8,7 +8,7 @@ import { shareController } from "../controllers/share.controller";
 const router = Router()
 
 router.get('/:id', authenticate, documentController.getOne)
-router.get('/get-all', authenticate, documentController.getAll)
+router.get('/', authenticate, documentController.getAll)
 router.put('/update/:id', authenticate, documentValidator.update, documentController.update)
 router.post('/create', authenticate, documentController.create)
 router.delete('/delete/:id', authenticate, documentController.delete)

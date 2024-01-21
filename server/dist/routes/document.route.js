@@ -8,7 +8,7 @@ const share_validator_1 = require("../validators/share.validator");
 const share_controller_1 = require("../controllers/share.controller");
 const router = (0, express_1.Router)();
 router.get('/:id', auth_1.authenticate, document_controller_1.documentController.getOne);
-router.get('/get-all', auth_1.authenticate, document_controller_1.documentController.getAll);
+router.get('/', auth_1.authenticate, document_controller_1.documentController.getAll);
 router.put('/update/:id', auth_1.authenticate, document_validator_1.documentValidator.update, document_controller_1.documentController.update);
 router.post('/create', auth_1.authenticate, document_controller_1.documentController.create);
 router.delete('/delete/:id', auth_1.authenticate, document_controller_1.documentController.delete);
