@@ -8,7 +8,7 @@ import DocumentService from "../../../services/document-service"
 import useAuth from "../../../hooks/use-auth"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-import { BASE_URL } from "../../../services/api"
+import API, { BASE_URL } from "../../../services/api"
 
 const EditorToolbar = () => {
 
@@ -24,13 +24,18 @@ const EditorToolbar = () => {
     setEditorState(EditorState.redo(editorState))
    }
 
-   const handleUnorderedList = () => {
-    setEditorState(RichUtils.toggleBlockType(editorState, 'unordered-list-item'));
-  };
-
   const handleBold = async () => {
     const newEditorState = RichUtils.toggleInlineStyle(editorState, 'BOLD');
+    setEditorState(newEditorState);
+  };
   
+  const handleTitle = () => {
+    const newEditorState = RichUtils.toggleInlineStyle(editorState, 'TITLE');
+    setEditorState(newEditorState);
+  };
+
+  const handleAlignCenter = () => {
+    const newEditorState = RichUtils.toggleInlineStyle(editorState, 'ALIGN_CENTER');
     setEditorState(newEditorState);
   };
   
@@ -42,6 +47,8 @@ const EditorToolbar = () => {
     <div className="h-5 border-1 border-1-gray-300 mx-2"></div>
     <FontSelect/>
     <button onClick={handleBold} className="font-bold ml-2 py-1 px-2 rounded-sm hover:bg-neutral-100">B</button>
+    <button onClick={handleTitle} className="font-medium ml-2 py-1 px-2 rounded-sm hover:bg-neutral-100">h1</button>
+    <button onClick={handleAlignCenter} className="font-medium ml-2 py-1 px-2 rounded-sm hover:bg-neutral-100">C</button>
   </div>
   )
 }
